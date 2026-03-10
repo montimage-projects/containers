@@ -4,7 +4,11 @@ on:
   push:
     tags: ["v*"] # Push events to matching v*, i.e. v1.0, v20.15.10
   workflow_dispatch: #manual trigger
-  
+
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   docker:
     runs-on: ubuntu-latest
