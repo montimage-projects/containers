@@ -1,0 +1,51 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    tags: ["v*"] # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    # build ans push different containers
+    - name: Build and push meteo image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./meteo
+        push: true
+        tags: ghcr.io/montimage-projects/containers:meteo
+
+    - name: Build and push city-info image 
+      uses: docker/build-push-action@v5
+      with:
+        context: ./city-info
+        push: true
+        tags: ghcr.io/montimage-projects/containers:city-info
+
+    - name: Build and push city-info image 
+      uses: docker/build-push-action@v5
+      with:
+        context: ./city-info
+        file: code.Dockerfile
+        push: true
+        tags: ghcr.io/montimage-projects/containers:city-info-code
+
+    - name: Build and push city-info image on top of MMT-Probe image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./city-info
+        file: probe.Dockerfile
+        push: true
+        tags: ghcr.io/montimage-projects/containers:city-info-probe
