@@ -27,7 +27,7 @@ GET /city?city=name
 Example:
 
 ```
-http://localhost/city?city=Paris
+http://localhost:4000/city?city=Paris
 ````
 
 Response:
@@ -39,7 +39,7 @@ Response:
 - Temperature: 29.
 ```
 
-<img src=screenshot>
+<img src=screenshot.png>
 
 ## Dependencies
 

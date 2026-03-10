@@ -30,7 +30,7 @@ GET /temperature/<city>
 Example:
 
 ```
-http://localhost/temperature/Paris
+http://localhost:5000/temperature/Paris
 ````
 
 Response:
