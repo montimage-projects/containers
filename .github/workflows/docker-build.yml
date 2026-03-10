@@ -39,11 +39,11 @@ jobs:
         push: true
         tags: ghcr.io/montimage-projects/containers:city-info
 
-    - name: Build and push city-info image 
+    - name: Build and push city-info image containing only code
       uses: docker/build-push-action@v5
       with:
         context: ./city-info
-        file: code.Dockerfile
+        file: city-info/code.Dockerfile
         push: true
         tags: ghcr.io/montimage-projects/containers:city-info-code
 
@@ -51,6 +51,6 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./city-info
-        file: probe.Dockerfile
+        file: city-info/probe.Dockerfile
         push: true
         tags: ghcr.io/montimage-projects/containers:city-info-probe
