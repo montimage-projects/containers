@@ -50,7 +50,7 @@ app.get("/", async (req, res) => {
 			</select>
 		<input type=Submit value=Send>
 		</form>
-		<iframe name=data width="400" height="200" frameborder="0"></iframe>
+		<iframe name=data width="500" height="200" frameborder="0"></iframe>
 	</center>`
 	);
 });
@@ -66,12 +66,19 @@ app.get("/city", async (req, res) => {
 
 		const meteo = await axios.get(`http://meteo:5000/temperature/${cityName}`);
 
+		const event = await axios.get(`http://meteo:5001/event/${cityName}`);
+
+		const e = event.data.event
+
 		res.send(
 		`
-			- Name:       ${city.name},<br/>
-			- Location:   ${JSON.stringify(city.location)},<br/>
-			- Population: ${city.population},<br/>
-			- Temperature: ${meteo.data.temperature}.
+			- <b>Name:</b>       ${city.name},<br/>
+			- <b>Info:</b> Location=${JSON.stringify(city.location)}, population=${city.population}<br/>
+			- <b>Temperature:</b> ${meteo.data.temperature}<br/>
+			- <b>Recommended culture event:</b> ${e.name}<br/>
+			&nbsp;&nbsp;&nbsp;+ description: ${e.description}<br/>
+			&nbsp;&nbsp;&nbsp;+ address: ${e.address}<br/>
+			&nbsp;&nbsp;&nbsp;+ horraire: ${e.horraire}<br/>
 		`);
 
 	} catch (err) {

@@ -54,3 +54,11 @@ jobs:
         file: city-info/probe.Dockerfile
         push: true
         tags: ghcr.io/montimage-projects/containers:city-info-probe
+
+
+    - name: Build and push events image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./events
+        push: true
+        tags: ghcr.io/montimage-projects/containers:events
