@@ -66,7 +66,7 @@ app.get("/city", async (req, res) => {
 
 		const meteo = await axios.get(`http://meteo:5000/temperature/${cityName}`);
 
-		const event = await axios.get(`http://meteo:5001/event/${cityName}`);
+		const event = await axios.get(`http://events:5001/event/${cityName}`);
 
 		const e = event.data.event
 
