@@ -64,9 +64,11 @@ app.get("/city", async (req, res) => {
 		if (!city) 
 			return res.status(404).end(`Error: City ${city} not found!`);
 
-		const meteo = await axios.get(`http://meteo:5000/temperature/${cityName}`);
+		const meteoEndpoint = process.env.METEO_ENDPOINT || 'meteo:5000'; 
+		const meteo = await axios.get(`http://${meteoEndpoint}/temperature/${cityName}`);
 
-		const event = await axios.get(`http://events:5001/event/${cityName}`);
+		const eventsEndpoint = process.env.EVENTS_ENDPOINT || 'events:5001';
+		const event = await axios.get(`http://${eventsEndpoint}/event/${cityName}`);
 
 		const e = event.data.event
 
