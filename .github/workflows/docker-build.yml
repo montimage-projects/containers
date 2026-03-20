@@ -64,9 +64,17 @@ jobs:
         tags: ghcr.io/montimage-projects/containers:events
 
 
-    - name: Build and push events image
+    - name: Build and push irtt image
       uses: docker/build-push-action@v5
       with:
         context: ./irtt
         push: true
         tags: ghcr.io/montimage-projects/containers:irtt
+
+
+    - name: Build and push net-measure image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./net-measure
+        push: true
+        tags: ghcr.io/montimage-projects/containers:net-measure
